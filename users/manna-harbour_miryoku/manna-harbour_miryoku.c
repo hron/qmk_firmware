@@ -98,7 +98,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 bool oled_task_user(void) {
     switch (get_highest_layer(layer_state)) {
         case 0:
-              oled_write_P(PSTR("BASE\n"), false);
               break;
         case 1:
               oled_write_P(PSTR("EXTRA\n"), true);
