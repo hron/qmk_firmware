@@ -96,40 +96,44 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 }
 
 static void oled_render_layer_state(void) {
-    switch (get_highest_layer(layer_state)) {
-        case 0:
-              oled_write_ln_P(PSTR("BASE"), false);
-              break;
-        case 1:
-              oled_write_ln_P(PSTR("EXTRA"), true);
-              break;
-        case 2:
-              oled_write_ln_P(PSTR("TAP"), true);
-              break;
-        case 3:
-              oled_write_ln_P(PSTR("BUTT"), false);
-              break;
-        case 4:
-              oled_write_ln_P(PSTR("NAV"), false);
-              break;
-        case 5:
-              oled_write_ln_P(PSTR("MOUSE"), false);
-              break;
-        case 6:
-              oled_write_ln_P(PSTR("MEDIA"), false);
-              break;
-        case 7:
-              oled_write_ln_P(PSTR("NUM"), false);
-              break;
-        case 8:
-              oled_write_ln_P(PSTR("SYM"), false);
-              break;
-        case 9:
-              oled_write_ln_P(PSTR("FUN"), false);
-              break;
-        default:
-            // Or use the write_ln shortcut over adding '\n' to the end of your string
-            oled_write_ln_P(PSTR("UNKNOWN"), false);
+    if (is_keyboard_master()) {
+        switch (get_highest_layer(layer_state)) {
+            case 0:
+                oled_write_ln_P(PSTR("BASE"), false);
+                break;
+            case 1:
+                oled_write_ln_P(PSTR("EXTRA"), false);
+                break;
+            case 2:
+                oled_write_ln_P(PSTR("TAP"), false);
+                break;
+            case 3:
+                oled_write_ln_P(PSTR("BUTT"), false);
+                break;
+            case 4:
+                oled_write_ln_P(PSTR("NAV"), false);
+                break;
+            case 5:
+                oled_write_ln_P(PSTR("MOUSE"), false);
+                break;
+            case 6:
+                oled_write_ln_P(PSTR("MEDIA"), false);
+                break;
+            case 7:
+                oled_write_ln_P(PSTR("NUM"), false);
+                break;
+            case 8:
+                oled_write_ln_P(PSTR("SYM"), false);
+                break;
+            case 9:
+                oled_write_ln_P(PSTR("FUN"), false);
+                break;
+            default:
+                // Or use the write_ln shortcut over adding '\n' to the end of your string
+                oled_write_ln_P(PSTR("UNKNOWN"), false);
+        }
+    } else {
+        oled_write_ln_P(PSTR("Corne"), true);
     }
 }
 
